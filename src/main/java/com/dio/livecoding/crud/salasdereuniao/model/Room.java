@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "meetingroom")
@@ -81,5 +82,20 @@ public class Room {
       + "]";
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Room room = (Room) o;
+    return Objects.equals(name, room.name) &&
+            Objects.equals(date, room.date) &&
+            Objects.equals(startHour, room.startHour) &&
+            Objects.equals(endHour, room.endHour);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, date, startHour, endHour);
+  }
 
 }
